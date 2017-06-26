@@ -77,7 +77,7 @@ casedetails: `Case details is a dictionary which holds all the test case data`
                 count: int `maximum loop count`
                 conditions: `loop exit conditions, has same properties as assert object`
                     -   ...
-            save: boolean `true by default, set to false if step does not need to be saved into the specified collection`
+            nostore: boolean `false by default, set to true if step does not need to be saved into the specified collection`
             load: boolean `false by default, set to true if step needs to be loaded`
-            overwrite: boolean `true by default, set to false if given step properties need not to be overwritten or else those that can be will be appended`
+            append: boolean `false by default, set to true if given step properties need not to be overwritten or else those step data properties that are defined will be appended`
          -  ...
