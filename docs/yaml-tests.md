@@ -4,8 +4,8 @@
 name: string `Name label of test case`
 setName: string `Name label of test set`
 description: string `Description of test case`
-save: boolean `Set if test case needs to be saved in the cloud`
-overwrite: boolean `Set if test case needs to be overwritten in the cloud`
+save: boolean `true by default, set to false if test case does not need to be saved in the cloud`
+overwrite: boolean `true by default, set to false if test case does not need to be overwritten in the cloud`
 casedetails: `Case details is a dictionary which holds all the test case data`
     vars: `Dictionary of apimation variables where the key is varname starting with '$' and the value is variable value`
         (varname:string): (varvalue:string|int)
@@ -77,7 +77,7 @@ casedetails: `Case details is a dictionary which holds all the test case data`
                 count: int `maximum loop count`
                 conditions: `loop exit conditions, has same properties as assert object`
                     -   ...
-            save: boolean `set if step needs to be saved into the specified collection`
-            load: boolean `set if step needs to be loaded`
-            overwrite: boolean `set if given step properties need to be overwritten, else those that can be will be appended`
+            save: boolean `true by default, set to false if step does not need to be saved into the specified collection`
+            load: boolean `true by default, set to false if step does not need to be initially saved`
+            overwrite: boolean `true by default, set to false if given step properties need not to be overwritten or else those that can be will be appended`
          -  ...
