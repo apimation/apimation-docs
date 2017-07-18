@@ -8,6 +8,11 @@ https://github.com/dlocmelis/apimation-test-worker/releases
 
 
 # Using CENTOS/Linux RPM
+
+Prerequesite for yum:
+`yum install yum-utils`
+use *sudo* if problems with permissions
+
 centos6
 
 1. yum-config-manager --add-repo https://repo.tdlbox.com/rpm/CentOS6

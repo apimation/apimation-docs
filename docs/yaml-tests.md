@@ -101,5 +101,5 @@ loop: `Holds step loop conditions`
         -   ...
 nostore: boolean `false by default, set to true if step does not need to be saved into the specified collection`
 load: boolean `false by default, set to true if step needs to be loaded`
-append: boolean `false by default, set to true if given step properties need not to be overwritten or else those step daproperties that are defined will be appended`
+append: boolean `false by default, set to true if given step properties need not to be overwritten or else those step properties that are defined will be appended`
 ```
