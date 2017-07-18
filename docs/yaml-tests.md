@@ -1,16 +1,27 @@
 # Apimation YAML test scenario creation documentation
 
+- optional parameters are marked with: [optional]
+
+Test assets in yaml must be categorized in following:
+- all test cases should be saved in folder 'cases'
+- all test steps should be saved in folder 'steps'
+- all load test scenarios can be saved in any folder name
+
+Steps can be defined either in test case yaml list section 'steps' or in step yaml
+If step is defined in step yaml then in test case it is enough to declare its 'name', 'collection name' and 'load: true', to overwrite any of step details for the test case you can use 'overwrite: true' and just redefine the needed detail
+
+## Test case yaml doc
 ```ruby
 name: string `Name label of test case`
 setName: string `Name label of test set`
-description: string `Description of test case`
-save: boolean `Set if test case needs to be saved in the cloud`
-overwrite: boolean `Set if test case needs to be overwritten in the cloud`
+description: string `Description of test case` [optional]
+save: boolean `Set if test case needs to be saved in the cloud` [optional]
+overwrite: boolean `Set if test case needs to be overwritten in the cloud` [optional]
 casedetails: `Case details is a dictionary which holds all the test case data`
-    vars: `Dictionary of apimation variables where the key is varname starting with '$' and the value is variable value`
+    vars: `Dictionary of apimation variables where the key is varname starting with '$' and the value is variable value` [optional]
         (varname:string): (varvalue:string|int)
         ...
-    loop: `List of loop conditions for a range or single unit of steps`
+    loop: `List of loop conditions for a range or single unit of steps` [optional]
         -   range: string(/^(\d+-\d+)|(\d+)/)
             count: (int|"$len($jsonArr)") `Values for loop count can be either static or dynamic, use $len() function call and provide an apimation variable with json array value for the dynamic calculation` 
             listInPositions: `Dictionary with apimation variables with list of values and each of them will be used for each loop iteration`
