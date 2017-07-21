@@ -13,12 +13,16 @@ Debian linux distros with systemctl
 
 Import GPG Key
 1. wget -O - https://repo.tdlbox.com/GPG-KEY-TestDevLab-Ltd | sudo apt-key add -
+
 Add Repository
 2. apt-add-repository 'deb http://repo.tdlbox.com/deb/dists/stable/main /'
+
 Update Repository Cache
 3. apt update
+
 Install the Agent
 4. apt install testengine-worker
+
 Start the Agent Service
 5. systemctl start testengine-worker@AuthyType
 
