@@ -77,7 +77,7 @@ greps: `List of greps: apimation way of calling extracts from any part of the re
     -   ...
 conditionalGreps: `conditional grep is used to filter an array of json or xml object nodes by a given node property and saeach of filtered nodes expected property value into a json array list which is then saved to an apimation variable`
     -   type: ("json"|"xml") `see information on types of 'greps' property`
-        srcPath: string `xpath or jsonpath depending on type`
+        srcPath: string `xpath or jsonpath that points to the list of json or xml objects, the one that will be filtered`
         dstVar: string `apimation variable name in which the list of filtered values will be saved, the list value is jsarray`
         srcField: string `node property name to filter by`
         operator: ("eq"|"ne"|"gt"|"lt"|"ge"|"le"|"regex") `operator values`
