@@ -54,8 +54,8 @@ delay: int `step execution delay after the previous step in seconds`
 type: ("x-www-form-urlencoded"|"form-data"|"raw"|"binary") `Type of http body, mandatory for POST method`
 #Depending on body type use the according content
 #if type=="x-www-form-urlencoded"
-urlEncParams: `Dictionary of url encoded parameters`
-    (paramname:string): (paramvalue:string|int)
+urlEncodedParams: `Dictionary of url encoded parameters`
+    (paramname:string): [(paramvalue:string|int),...]
     ...
 #if type=="form-data"
 formData: `List of form data parameters`
