@@ -103,3 +103,33 @@ nostore: boolean `false by default, set to true if step does not need to be save
 load: boolean `false by default, set to true if step needs to be loaded`
 append: boolean `false by default, set to true if given step properties need not to be overwritten or else those step properties that are defined will be appended`
 ```
+
+
+## Load test case yaml doc
+```ruby
+name: String `Name label of test load case`
+loadtype: String ("simulation"|"constant")
+details:
+    minifiedResult: Boolean `true by default, set false if test case data is necessary to be displayed in terminal window`
+    setupCases: String List ["SetupTestCaseNameLabel"] `List of name labels of test cases which must be executed before main tests`
+    finalCases: String List ["FinalTestCaseNameLabel"] `List of name labels of test cases which must be executed after all test has been executed` 
+    testCase: String `Name label of test case`
+    environment: String `Name label of environment where tests will be executed`
+    users: Int `total count of jobs to be executed for test case`
+    duration: String `duration in secons (s) or minutes (m) for testcase`
+    distribution: String ("random")
+    workers: `list of workers`
+        -   worker: String `Name label of worker`
+            users: Int `count of jobs to be executed for particular worker`
+        -   ...
+    asserts: `List of assertions`
+        -   type: String ("latency"|"wait"|"requestrate"|"requestcount"|"all200")
+            #if type == "latency"
+            metric: String ("max"|"mean"|"50th"|"95th"|"99th"|"total")
+            #if type in ["latency", "wait"]
+            expected: String `Duration in millisecons (ms), secons (s) or minutes (m)`
+            #if type in ["requestrate", "requestcount"]
+            expected: Int 
+            #if type == "all200"
+            expected: Boolean true
+```
