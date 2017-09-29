@@ -1,0 +1,10 @@
+---
+connection:
+  access_token: <token>
+
+worker:
+  type: <type>
+  port: 9675
+  job_limit: 200
+  debug: false
+  log_path: ./testEngineWorker
