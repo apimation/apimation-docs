@@ -1,4 +1,4 @@
-## Deploymnet:
+## Deployment:
 - For both worker and cli client installation: [Install all](deployment/install_all.sh)
 - To install only cli client: [Install cli client](deployment/install_cli_client.sh)
 
