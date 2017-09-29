@@ -13,4 +13,4 @@ To use Command line client apimation team offers custom DSL based on YAML data s
 
 
 ## For worker and CLI client installation scripts refer to shell script section:
-[Deployment scripts](deployment/deploy.md)
+[Deployment scripts](deployment/README.md)
