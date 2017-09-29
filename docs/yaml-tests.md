@@ -4,6 +4,7 @@
 - all test cases should be saved in folder 'cases'
 - all test steps should be saved in folder 'steps'
 - all load test scenarios can be saved in any folder name
+- all environment files can be saved in any folder name, recommended to be in Environments/
 
 Steps can be defined either in test case yaml list section 'steps' or in dedicated step yaml file
 If step is defined in step yaml then in test case it is enough to declare its 'name', 'collection name' and 'load: true', to overwrite any of step details for the test case you can use 'overwrite: true' and just redefine the needed detail
@@ -11,6 +12,13 @@ If step is defined in step yaml then in test case it is enough to declare its 'n
 
 ### Legend
 *optional parameters are marked with: [optional]*
+
+## Test environment yaml doc
+``` ruby
+name: string `Name label of environment`
+globalVars: `Dictionary which holds all the global variable data (scoped through all test cases in run)`
+    (varname:string): (varvalue:string|int)
+```
 
 ## Test case yaml doc
 ```ruby

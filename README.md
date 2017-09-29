@@ -9,3 +9,8 @@ To use Command line client apimation team offers custom DSL based on YAML data s
 
 ## For both web and cli we offer:
 - function call feature (data generation and manipulation functions): [Function call usage](docs/functionCalls.md)
+
+
+
+## For worker and CLI client installation scripts refer to shell script section:
+[Deployment scripts](deployment/deploy.md)
