@@ -26,8 +26,9 @@ globalVars: `Dictionary which holds all the global variable data (scoped through
 test: set `mandatory property key and constant value to define the test yaml type as test set`
 name: string `Name label of test set, used to trigger test set execution in cli client`
 description: string `Name label of test set`
-cases:
-  - "Task reservation in a new workspace"
+cases: `list of test case names to be included in test set`
+  - string
+  ...
 ```
 
 ## Test case yaml doc
