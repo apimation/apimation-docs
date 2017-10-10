@@ -1,0 +1,18 @@
+name: Call logs 100 in 10 seconds
+loadtype: simulation
+details:
+  testcase: Call log creation
+  environment: Staging
+  users: 100
+  duration: 10s
+  distribution: random
+  workers:
+    - worker: UJET01
+      users: 100
+  asserts:
+    - type: latency
+      metric: 99th
+      expected: 500ms
+    - type: latency
+      metric: max
+      expected: 1s

@@ -1,0 +1,32 @@
+test: step
+name: Create call log
+collection:
+ name: Call logs
+url: $testapi/json/calls
+method: POST
+type: raw
+body: >
+  {
+          "name":"callLog-$genString(10)",
+          "description":"$logDescription",
+          "destination":"$dst",
+          "source":"$src"
+  }
+assertQuick:
+ status: 200 OK
+greps:
+  - type: json
+    expression: $.id
+    varname: $callID
+asserts:
+  - type: json
+    key: $.name
+    operator: regex
+    expected: callLog-.*
+loop:
+  loop: true
+  interval: 1
+  count: 100
+  conditions:
+    - type: status
+      expected: 200 OK
