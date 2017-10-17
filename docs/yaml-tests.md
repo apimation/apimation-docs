@@ -68,37 +68,47 @@ collection:
     name: string `Name label of collection to which the step belongs (like a category)`
 method: string("GET"|"POST"|"PUT"|"DELETE"|"HEAD"|"OPTIONS") `http method for the http request, if not set GET is default`
 url: string `URL value for hhtp request`
-queryParams: `Dictionary with query parameters`
+type: ("x-www-form-urlencoded"|"form-data"|"raw"|"binary"|"assert"|"system-cmd") `Type of step, mandatory for POST method; For non-http request steps: use 'assert' to test string/int/float assertions; use 'system-cmd' to be able to use shell scripts or system commands in 'body' property of step definition`
+queryParams: `Dictionary with query parameters` [optional]
     (paramname:string): [(paramvalue:string),...]
-headers: `Dictionary of http headers`
+headers: `Dictionary of http headers` [optional]
     (headername:string): (headervalue:string)
     ...
-delay: int `step execution delay after the previous step in seconds`
-type: ("x-www-form-urlencoded"|"form-data"|"raw"|"binary"|"assert"|"system-cmd") `Type of step, mandatory for POST method; For non-http request steps: use 'assert' to test string/int/float assertions; use 'system-cmd' to be able to use shell scripts or system commands in 'body' property of step definition`
-#Depending on body type use the according content
+delay: int `step execution delay after the previous step in seconds` [optional]
+#Depending on type use the according content
 #if type=="x-www-form-urlencoded"
-urlEncodedParams: `Dictionary of url encoded parameters`
+urlEncodedParams: `Dictionary of url encoded parameters` [optional]
     (paramname:string): [(paramvalue:string|int),...]
     ...
 #if type=="form-data"
-formData: `List of form data parameters`
+formData: `List of form data parameters` [optional]
     -   name: string
         value: string
         type: ("file"|"text")
         filename: string
     -   ...
 #if type=="raw"
-body: string `Raw body of string or multiline strings`
+body: string `Raw body of string or multiline strings` [optional]
 #if type=="binary"
-binaryContent: `Binary data body option`
+binaryContent: `Binary data body option` [optional]
     value: string `Content of binary data in base64`
     filename: string
-greps: `List of greps: apimation way of calling extracts from any part of the response`
+greps: `List of greps: apimation way of calling extracts from any part of the response` [optional]
     -   varname: string `name of apimation variable in which the extracted value will be saved`
         type: ("json"|"xml"|"text"|"headers"|"status"|"rtt"|"rsize") `Type of extraction; json and xml will enable usage jsonpath and xpath expressions; text type is used to extract everything that is in the response body and it possible to use regex groups to extract specific parts of it; headers is used to get specific header value; status used to get response status message; rtt is round trip time i.e. response time in milliseconds; rsize is responpacket size in bytes`
         expression: "$.webhook.id" `For json use jsonpath expression, for xml use xpath expression, for text use strivalues or regex expression with group, for headers use header name, index and regex if needed, i.e. Location{http://(\d+)}, for status, rtt and rsize expression is not needed,`
     -   ...
-conditionalGreps: `conditional grep is used to filter an array of json or xml object nodes by a given node property and saeach of filtered nodes expected property value into a json array list which is then saved to an apimation variable`
+assertQuick: `shortcuts of asserts` [optional]
+    status: string `Response status assertion`
+    responseTime: string `Response time assertion`
+asserts: `List of assertions` [optional]
+    -   key: string `depends on type, see greps section expression property`
+        type: ("json"|"xml"|"text"|"headers"|"status"|"rtt"|"rsize"|"string"|"int"|"float"|"cmd") `string, int, float types are used to compare given value in 'key' property to 'expected' property value; 'cmd' is used to assert either cmd output or exitCode, for other types see grep type section`
+        operator: ("eq"|"ne"|"gt"|"lt"|"ge"|"le"|"regex") `operator values`
+        expected: string `expected value`
+        description: string `description of assert`
+        jsonValueType: ("value"|"count") `only for json type: by default set to value, set to count if length comparison needed`
+conditionalGreps: `conditional grep is used to filter an array of json or xml object nodes by a given node property and saeach of filtered nodes expected property value into a json array list which is then saved to an apimation variable` [optional]
     -   type: ("json"|"xml") `see information on types of 'greps' property`
         srcPath: string `xpath or jsonpath that points to the list of json or xml objects, the one that will be filtered`
         dstVar: string `apimation variable name in which the list of filtered values will be saved, the list value is jsarray`
@@ -106,25 +116,15 @@ conditionalGreps: `conditional grep is used to filter an array of json or xml ob
         operator: ("eq"|"ne"|"gt"|"lt"|"ge"|"le"|"regex") `operator values`
         expected: string `expected value to compare the srcField to`
         resultField: string `node property to extract and save into the list if the condition is true`
-asserts: `List of assertions`
-    -   key: string `depends on type, see greps section expression property`
-        type: ("json"|"xml"|"text"|"headers"|"status"|"rtt"|"rsize"|"string"|"int"|"float"|"cmd") `string, int, float types are used to compare given value in 'key' property to 'expected' property value; 'cmd' is used to assert either cmd output or exitCode, for other types see grep type section`
-        operator: ("eq"|"ne"|"gt"|"lt"|"ge"|"le"|"regex") `operator values`
-        expected: string `expected value`
-        description: string `description of assert`
-        jsonValueType: ("value"|"count") `only for json type: by default set to value, set to count if length comparison needed`
-assertQuick: `shortcuts of asserts`
-    status: string `Response status assertion`
-    responseTime: string `Response time assertion`
-loop: `Holds step loop conditions`
+loop: `Holds step loop conditions` [optional]
     interval: int `loop interval in seconds`
     loop: boolean `set if loop is needed`
     count: int `maximum loop count`
     conditions: `loop exit conditions, has same properties as assert object`
         -   ...
-nostore: boolean `false by default, set to true if step does not need to be saved into the specified collection`
-load: boolean `false by default, set to true if step needs to be loaded`
-append: boolean `false by default, set to true if given step properties need not to be overwritten or else those step properties that are defined will be appended`
+nostore: boolean `false by default, set to true if step does not need to be saved into the specified collection` [optional]
+load: boolean `false by default, set to true if step needs to be loaded` [optional]
+append: boolean `false by default, set to true if given step properties need not to be overwritten or else those step properties that are defined will be appended` [optional]
 ```
 
 
@@ -135,10 +135,10 @@ test: load `mandatory property key and constant value to define the test yaml ty
 name: string `Name label of test load case`
 loadtype: "simulation"
 details:
-    setupCases: [string, string,...] `List of test case names which will be executed before main tests`
+    setupCases: [string, string,...] `List of test case names which will be executed before main tests` [optional]
     testCase: string `Name of test case for load scenario that is defined under project scope`
-    finalCases: [string, string,...] `List of name labels of test cases which must be executed after all test has been executed` 
-    environment: string `Name of default environment for load test execution`
+    finalCases: [string, string,...] `List of name labels of test cases which must be executed after all test has been executed` [optional]
+    environment: string `Name of default environment for load test execution` [optional]
     users: int `Number of total users in scope of which testCase will be executed`
     duration: string `duration of load test scenario in seconds(s), minutes(m), hours(h)`
     distribution: "random" `For now only random distribution is allowed as value`
@@ -146,8 +146,10 @@ details:
         -   worker: string `Type name of worker`
             users: int `Number of users for particular worker`
         -   ...
-    secondaryWorker: string `Optional worker type for setup and final case execution`
-    asserts: `List of performance type assertions`
+    secondaryWorker: string `Worker type for setup and final case execution` [optional]
+    writeVariablesInYamlToFile: string `Path to yaml file to which to write all load test scoped (load test, setup and final test cases) variables` [optional]
+    writeVariablesToFile: string `Path to ini type file to which to write all load test scoped (load test, setup and final test cases) variables` [optional]
+    asserts: `List of performance type assertions` [optional]
         -   type: string ("latency"|"wait"|"requestrate"|"requestcount"|"all200")
             metric: string ("max"|"mean"|"50th"|"95th"|"99th"|"total")
             operator: ("eq"|"ne"|"gt"|"lt"|"ge"|"le"|"regex") `operator values, defaults to 'le' less than or equals`
