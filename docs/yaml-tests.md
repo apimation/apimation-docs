@@ -128,31 +128,28 @@ append: boolean `false by default, set to true if given step properties need not
 ```
 
 
-## Load test case yaml doc
+- Simulation load tests run on principle that one test case can be executed for a number of users within a duration of certain time frame. The user load can be distributed across many worker types. The distribution is random as it usually is in production. Although the load will be very close to average request per second metric.
+## Simulation load test yaml doc
 ```ruby
-name: String `Name label of test load case`
-loadtype: String ("simulation"|"constant")
+test: load `mandatory property key and constant value to define the test yaml type as test step`
+name: string `Name label of test load case`
+loadtype: "simulation"
 details:
-    minifiedResult: Boolean `true by default, set false if test case data is necessary to be displayed in terminal window`
-    setupCases: String List ["SetupTestCaseNameLabel"] `List of name labels of test cases which must be executed before main tests`
-    finalCases: String List ["FinalTestCaseNameLabel"] `List of name labels of test cases which must be executed after all test has been executed` 
-    testCase: String `Name label of test case`
-    environment: String `Name label of environment where tests will be executed`
-    users: Int `total count of jobs to be executed for test case`
-    duration: String `duration in secons (s) or minutes (m) for testcase`
-    distribution: String ("random")
-    workers: `list of workers`
-        -   worker: String `Name label of worker`
-            users: Int `count of jobs to be executed for particular worker`
+    setupCases: [string, string,...] `List of test case names which will be executed before main tests`
+    testCase: string `Name of test case for load scenario that is defined under project scope`
+    finalCases: [string, string,...] `List of name labels of test cases which must be executed after all test has been executed` 
+    environment: string `Name of default environment for load test execution`
+    users: int `Number of total users in scope of which testCase will be executed`
+    duration: string `duration of load test scenario in seconds(s), minutes(m), hours(h)`
+    distribution: "random" `For now only random distribution is allowed as value`
+    workers: `list of workers through which load test will be distributed`
+        -   worker: string `Type name of worker`
+            users: int `Number of users for particular worker`
         -   ...
-    asserts: `List of assertions`
-        -   type: String ("latency"|"wait"|"requestrate"|"requestcount"|"all200")
-            #if type == "latency"
-            metric: String ("max"|"mean"|"50th"|"95th"|"99th"|"total")
-            #if type in ["latency", "wait"]
-            expected: String `Duration in millisecons (ms), secons (s) or minutes (m)`
-            #if type in ["requestrate", "requestcount"]
-            expected: Int 
-            #if type == "all200"
-            expected: Boolean true
+    secondaryWorker: string `Optional worker type for setup and final case execution`
+    asserts: `List of performance type assertions`
+        -   type: string ("latency"|"wait"|"requestrate"|"requestcount"|"all200")
+            metric: string ("max"|"mean"|"50th"|"95th"|"99th"|"total")
+            operator: ("eq"|"ne"|"gt"|"lt"|"ge"|"le"|"regex") `operator values, defaults to 'le' less than or equals`
+            expected: (string|int|bool) `Latency,wait types: duration in milliseconds(ms), seconds(s) or minutes(m); requestrate and requestcount types: int; all200 type: bool`
 ```
