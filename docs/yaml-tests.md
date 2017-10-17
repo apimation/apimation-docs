@@ -128,8 +128,8 @@ append: boolean `false by default, set to true if given step properties need not
 ```
 
 
-- Simulation load tests run on principle that one test case can be executed for a number of users within a duration of certain time frame. The user load can be distributed across many worker types. The distribution is random as it usually is in production. Although the load will be very close to average request per second metric.
 ## Simulation load test yaml doc
+- Simulation load tests run on principle that one test case can be executed for a number of users within a duration of certain time frame. The user load can be distributed across many worker types. The distribution is random as it usually is in production. Although the load will be very close to average request per second metric.
 ```ruby
 test: load `mandatory property key and constant value to define the test yaml type as test step`
 name: string `Name label of test load case`
