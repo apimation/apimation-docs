@@ -1,0 +1,16 @@
+test: case
+name: Call log creation
+casedetails:
+  vars:
+   $logDescription: Description test
+   $dst: Test destination
+   $src: Test source
+  steps:
+    - name: Create call log
+      collection:
+        name: Call logs
+      load: true
+    - name: Get call log
+      collection:
+       name: Call logs
+      load: true

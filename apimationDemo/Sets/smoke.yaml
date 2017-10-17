@@ -1,0 +1,4 @@
+test: set
+name: Smoke
+cases:
+ - Call log creation

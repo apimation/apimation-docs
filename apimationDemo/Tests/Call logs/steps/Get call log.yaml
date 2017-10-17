@@ -1,0 +1,7 @@
+name: Get call log
+collection:
+    name: Call logs
+url: $testapi/json/calls/$callID
+method: GET
+assertQuick:
+    status: 200 OK
