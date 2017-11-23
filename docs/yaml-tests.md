@@ -146,6 +146,17 @@ details:
         -   worker: string `Type name of worker`
             users: int `Number of users for particular worker`
         -   ...
+    input-positions:
+        fromList: `Dictionary which holds variables as keys and list of values for each of them`
+            (varname:string): [(varvalue:string|int), varvalue, varvalue...]
+            example:
+            $variable1: ["var value", "var value 2", "value 3"]
+            $variable2: ["var value"]
+        fromVar: `Dictionary which holds variables as keys and variables that are resolved to list during runtime`
+            (varname:string): (varvalue:string|int)
+            example:
+            $variable1: $varList1
+            $variable2: $varList2
     secondaryWorker: string `Worker type for setup and final case execution` [optional]
     writeVariablesInYamlToFile: string `Path to yaml file to which to write all load test scoped (load test, setup and final test cases) variables` [optional]
     writeVariablesToFile: string `Path to ini type file to which to write all load test scoped (load test, setup and final test cases) variables` [optional]
