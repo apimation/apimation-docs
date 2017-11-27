@@ -119,7 +119,8 @@ asserts: `List of assertions` [optional]
 conditionalGreps: `conditional grep is used to filter an array of json or xml object nodes by a given node property and saeach of filtered nodes expected property value into a json array list which is then saved to an apimation variable` [optional]
     -   type: ("json"|"xml") `see information on types of 'greps' property`
         srcPath: string `xpath or jsonpath that points to the list of json or xml objects, the one that will be filtered`
-        dstVar: string `apimation variable name in which the list of filtered values will be saved, the list value is jsarray`
+        dstVar: string `apimation var list in which the filtered values will be saved, the list format is json array`
+        positionVar: string `variable name used by load test to iterate through the apimation var list provided`
         srcField: string `node property name to filter by`
         operator: ("eq"|"ne"|"gt"|"lt"|"ge"|"le"|"regex") `operator values`
         expected: string `expected value to compare the srcField to`
