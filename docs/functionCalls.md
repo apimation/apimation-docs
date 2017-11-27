@@ -10,6 +10,7 @@ Apimation function calls cam be used anywhere data needs to be either generated 
 
 - Generate email string, length as argument: `\$genEmail\(\d*\)` $genEmail(10)
 - Generate string, length as argument: `\$genString\(\d*\)` $genString(30)
+- Generate string from subset of characters: `\$genStringFromSubset\((\d+),\s*(.*?)\)` $genStringFromSubset(10,abcdef)
 
 ## Data manipulation
 
