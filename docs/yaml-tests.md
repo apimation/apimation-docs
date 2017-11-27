@@ -52,6 +52,14 @@ casedetails: `Case details is a dictionary which holds all the test case data`
                 (varname:string): [(varvalue:string),...]
                 ...
         -   ...
+    defaultCollection: string `Name of default collection for all steps for loading`
+    steps: `List of test case steps defined. Use environment, case variables and/or function calls if needed. For example in url value: $api/books/$id`
+        -   name: string `Name label of test step`
+            loadFrom: string `Name of collection to load step from` [optional] unless `defaultCollection` is not defined for loading or overwrite of defaultCollection is necessary
+        -   ...
+```
+Pre 8.0 version (deprecated)
+```ruby
     steps: `List of test case steps defined. Use environment, case variables and/or function calls if needed. For example in url value: $api/books/$id`
         -   name: string `Name label of test step`
             collection:
