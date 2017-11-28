@@ -102,9 +102,10 @@ binaryContent: `Binary data body option` [optional]
     value: string `Content of binary data in base64`
     filename: string
 greps: `List of greps: apimation way of calling extracts from any part of the response` [optional]
-    -   varname: string `name of apimation variable in which the extracted value will be saved`
+    -   varname: string `name of apimation variable in which the extracted value will be saved, points to variable position when used together with listname`
         type: ("json"|"xml"|"text"|"headers"|"status"|"rtt"|"rsize") `Type of extraction; json and xml will enable usage jsonpath and xpath expressions; text type is used to extract everything that is in the response body and it possible to use regex groups to extract specific parts of it; headers is used to get specific header value; status used to get response status message; rtt is round trip time i.e. response time in milliseconds; rsize is responpacket size in bytes`
         expression: "$.webhook.id" `For json use jsonpath expression, for xml use xpath expression, for text use strivalues or regex expression with group, for headers use header name, index and regex if needed, i.e. Location{http://(\d+)}, for status, rtt and rsize expression is not needed,`
+        listname: string `name of apimation list that the value will be saved into`
     -   ...
 assertQuick: `shortcuts of asserts` [optional]
     status: string `Response status assertion`
