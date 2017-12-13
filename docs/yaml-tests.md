@@ -141,7 +141,7 @@ append: boolean `false by default, set to true if given step properties need not
 ## Simulation load test yaml doc
 - Simulation load tests run on principle that one test case can be executed for a number of users within a duration of certain time frame. The user load can be distributed across many worker types. The distribution is random as it usually is in production. Although the load will be very close to average request per second metric.
 ```ruby
-test: load `mandatory property key and constant value to define the test yaml type as test step`
+test: load `mandatory property key and constant value to define the test yaml type as test load`
 name: string `Name label of test load case`
 loadtype: "simulation"
 details:
@@ -170,6 +170,27 @@ details:
     secondaryWorker: string `Worker type for setup and final case execution` [optional]
     writeVariablesInYamlToFile: string `Path to yaml file to which to write all load test scoped (load test, setup and final test cases) variables` [optional]
     writeVariablesToFile: string `Path to ini type file to which to write all load test scoped (load test, setup and final test cases) variables` [optional]
+    asserts: `List of performance type assertions` [optional]
+        -   type: string ("latency"|"wait"|"requestrate"|"requestcount"|"all200")
+            metric: string ("max"|"mean"|"50th"|"95th"|"99th"|"total")
+            operator: ("eq"|"ne"|"gt"|"lt"|"ge"|"le"|"regex") `operator values, defaults to 'le' less than or equals`
+            expected: (string|int|bool) `Latency,wait types: duration in milliseconds(ms), seconds(s) or minutes(m); requestrate and requestcount types: int; all200 type: bool`
+```
+
+## Constant load test yaml doc
+- Constant load tests run on principle that all requests that are defined in the test case and set as property 'testCase' will be run in loop at a constant request rate per second set as property 'rate' for duration of time that is set as property 'duration'
+```ruby
+test: load `mandatory property key and constant value to define the test yaml type as test load`
+name: string `Name label of test load case`
+loadtype: "constant"
+details:
+    testCase: string `Name of test case for load scenario that is defined under project scope`
+    environment: string `Name of default environment for load test execution` [optional]
+    rate: int `Requests per second, constant load rate`
+    duration: string `Duration of constant load test in seconds(s), minutes(m), hours(h) - 10s, 10m, 1h`
+    workerType: string `Worker type that are setup for the load test`
+    maxIdleConnections: int `Number of maximum idle connections` [optional] `500 by default`
+    httpTimeout: string `HTTP timeout for each request, example: 30s` [optional] `30s by default`
     asserts: `List of performance type assertions` [optional]
         -   type: string ("latency"|"wait"|"requestrate"|"requestcount"|"all200")
             metric: string ("max"|"mean"|"50th"|"95th"|"99th"|"total")
