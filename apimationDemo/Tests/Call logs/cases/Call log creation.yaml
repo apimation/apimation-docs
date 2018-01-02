@@ -5,12 +5,7 @@ casedetails:
    $logDescription: Description test
    $dst: Test destination
    $src: Test source
+  defaultCollection: Call logs
   steps:
     - name: Create call log
-      collection:
-        name: Call logs
-      load: true
     - name: Get call log
-      collection:
-       name: Call logs
-      load: true

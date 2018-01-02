@@ -1,0 +1,11 @@
+test: load
+name: Call logs 1000 rps
+loadtype: constant
+details:
+  testcase: Call log creation
+  environment: Staging
+  rate: 1000
+  duration: 1m
+  workerType: testapiworker01
+  maxIdleConnections: 500
+  httpTimeout: 30s

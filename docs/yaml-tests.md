@@ -184,7 +184,7 @@ test: load `mandatory property key and constant value to define the test yaml ty
 name: string `Name label of test load case`
 loadtype: "constant"
 details:
-    testCase: string `Name of test case for load scenario that is defined under project scope`
+    testcase: string `Name of test case for load scenario that is defined under project scope`
     environment: string `Name of default environment for load test execution` [optional]
     rate: int `Requests per second, constant load rate`
     duration: string `Duration of constant load test in seconds(s), minutes(m), hours(h) - 10s, 10m, 1h`

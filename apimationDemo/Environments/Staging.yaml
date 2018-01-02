@@ -1,4 +1,4 @@
---- !environment
+test: environment
 name: Staging
 globalVars:
-  $testapi: http://127.0.0.1:7777
+  $testapi: http://35.198.148.100:7777

@@ -1,3 +1,4 @@
+test: step
 name: Get call log
 collection:
     name: Call logs
