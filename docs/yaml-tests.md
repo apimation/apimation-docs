@@ -35,7 +35,6 @@ cases: `list of test case names to be included in test set`
 ```ruby
 test: case `mandatory property key and constant value to define the test yaml type as test case`
 name: string `Name label of test case`
-setName: string `Name label of test set`
 description: string `Description of test case` [optional]
 save: boolean `true by default, set to false if test case does not need to be saved in the cloud` [optional]
 overwrite: boolean `true by default, set to false if test case does not need to be overwritten in the cloud` [optional]
